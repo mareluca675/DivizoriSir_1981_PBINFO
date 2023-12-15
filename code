@@ -1,0 +1,49 @@
+#include <iostream>
+
+using namespace std;
+
+unsigned long long n, m, d, i, j, k, numar_divizori, exponent;
+
+int main()
+{
+    cin >> n;
+    
+    for(i = 0; i < n; i ++)
+    {
+        m = i * (1ULL << i) + 1;
+        numar_divizori = 1;
+        
+        while(m % 2 == 0)
+        {
+            exponent ++;
+        }
+        
+        numar_divizori = numar_divizori * (exponent + 1);
+        exponent = 0;
+        
+        for(d = 3; d * d <= m; d += 2)
+        {
+            while(m % d == 0)
+            {
+                exponent ++;
+                m = m / d;
+            }
+            
+            if(exponent != 0)
+            {
+                numar_divizori = numar_divizori * (exponent + 1);
+            }
+            
+            exponent = 0;
+        }
+        
+        if(m > 1)
+        {
+            numar_divizori = numar_divizori * 2;
+        }
+        
+        cout << numar_divizori << " ";
+    }
+
+    return 0;
+}
